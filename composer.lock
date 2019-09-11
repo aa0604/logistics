@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "f55c2179026cc341c680640b94653b1e",
+    "packages": [
+        {
+            "name": "xing.chen/helper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aa0604/helper.git",
+                "reference": "97ed7700ae92e4477f4b735ebc8bd76a118d092b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aa0604/helper/zipball/97ed7700ae92e4477f4b735ebc8bd76a118d092b",
+                "reference": "97ed7700ae92e4477f4b735ebc8bd76a118d092b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "xing\\helper\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ChenXing",
+                    "email": "877349686@qq.com"
+                }
+            ],
+            "description": "各种助手",
+            "time": "2019-09-03T15:34:08+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "xing.chen/helper": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7.0.0"
+    },
+    "platform-dev": []
+}

@@ -3,7 +3,11 @@
 
 namespace xing\core;
 
-
+/**
+ * 物流工厂
+ * Class LogisticsFactory
+ * @package xing\core
+ */
 class LogisticsFactory
 {
 
