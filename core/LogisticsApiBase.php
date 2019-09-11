@@ -11,6 +11,8 @@ namespace xing\core;
  * @property bool $sandbox 沙箱模式
  * @property array $data 数据
  * @property array $config 接口配置
+ * @property array $address 地址
+ *
  *
  * @package xing\core
  */
@@ -19,6 +21,8 @@ class LogisticsApiBase
     private $sandbox = false;
     public $data = [];
     private $config = [];
+
+    public $address = [];
 
 
     /**
@@ -52,5 +56,33 @@ class LogisticsApiBase
     {
         $this->config = array_merge($this->config, $config);
         return $this;
+    }
+
+    /**
+     * 设置地址
+     * @param $address1
+     * @param string $address2
+     * @param string $areaName
+     * @param string $cityName
+     * @param string $provinceName
+     * @param string $countryName
+     * @return $this
+     */
+    public function setAddress($address1, $address2 = '', $areaName = '', $cityName = '', $provinceName = '', $countryName = '')
+    {
+        $this->address = [
+            'address1' => $address1,
+            'address2' => $address2,
+            'areaName' => $areaName,
+            'cityName' => $cityName,
+            'provinceName' => $provinceName,
+            'countryName' => $countryName,
+        ];
+        return $this;
+    }
+
+    public function setCode($cityCode, $countryCode = '')
+    {
+
     }
 }

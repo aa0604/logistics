@@ -12,5 +12,6 @@ interface LogisticsInterface
 {
 
     public function config($config);
-    public function dealCreateOrder($orderId, $omsOrder, $shippingMethodWarehouseData, $address, $OmsOrderItemInfo);
+    public function createOrder($orderSn);
+    public function setAddress($address1, $address2 = '', $areaName = '', $cityName = '', $provinceName = '', $countryName = '');
 }
