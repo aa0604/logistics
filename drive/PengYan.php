@@ -22,7 +22,7 @@ class PengYan extends \xing\core\LogisticsApiBase implements LogisticsInterface
 
 
 
-    public function createOrder($orderSn, $sku, $consignee, $tel, $address, $weight = null)
+    public function addOrder($orderSn, $sku, $consignee, $tel, $address, $weight = null)
     {
 
     }

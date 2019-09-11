@@ -12,6 +12,9 @@ namespace xing\core;
  * @property array $data 数据
  * @property array $config 接口配置
  * @property array $address 地址
+ * @property string $cityCode 城市邮编
+ * @property string $countryCode 国家编码
+ * @property array $goods 国家编码
  *
  *
  * @package xing\core
@@ -23,6 +26,10 @@ class LogisticsApiBase
     private $config = [];
 
     public $address = [];
+    public $cityCode;
+    public $countryCode;
+
+    public $goods;
 
 
     /**
@@ -81,8 +88,44 @@ class LogisticsApiBase
         return $this;
     }
 
-    public function setCode($cityCode, $countryCode = '')
-    {
 
+    /**
+     * 设置城市编码，国家编码
+     * @param string $cityCode
+     * @param string|null $countryCode
+     * @return $this
+     */
+    public function setCode(string $cityCode, ? string $countryCode = '')
+    {
+        $this->cityCode = $cityCode;
+        $this->countryCode = $countryCode;
+        return $this;
+    }
+
+    /**
+     * 增加一个商品/货物
+     * @param int $number
+     * @param int $weight
+     * @param int $totalMoney
+     * @param string $goodsName
+     * @param string $currency
+     * @param float $price
+     * @param string $goodsName2 商品名称 2
+     * @return $this
+     */
+    public function addGoods(
+        $number = 1, $weight = 0, $totalMoney = 0,  $goodsName = '', $currency = '', $price = 0.00, $goodsName2 = ''
+    )
+    {
+        $this->goods[] = [
+            'totalMoney' => $totalMoney,
+            'number' => $number,
+            'price' => $price,
+            'goodsName' => $goodsName,
+            'weight' => $weight,
+            'currency' => $currency,
+            'goodsName2' => $goodsName2,
+        ];
+        return $this;
     }
 }
