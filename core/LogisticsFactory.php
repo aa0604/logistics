@@ -1,7 +1,9 @@
 <?php
 
 
-namespace xing\core;
+namespace xing\logistics\core;
+
+use xing\logistics\drive\PengYan;
 
 /**
  * 物流工厂
@@ -13,13 +15,13 @@ class LogisticsFactory
 
     /**
      * @param string $drive
-     * @return mixed
+     * @return PengYan
      * @throws \Exception
      */
     public static function getInstance($drive)
     {
         $set = [
-            'PengYan' => '\xing\drive\PengYan',
+            'PengYan' => '\xing\logistics\drive\PengYan',
         ];
         $class = $set[$drive] ?? null;
         if (empty($class)) throw new \Exception('没有这个驱动');
