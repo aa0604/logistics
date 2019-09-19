@@ -20,6 +20,7 @@ use xing\helper\resource\HttpHelper;
  * @property string $consignorCountryCode 发货人国家编码
  * @property array $goods 商品
  * @property string $apiDomain 接口域名
+ * @property string $printDomain 面单打印域名
  * @property string|array $result 请求结果
  * @property array $contacts 联系人
  * @property array $consignor 发货人
@@ -51,6 +52,8 @@ class LogisticsApiBase
     public $post;
     public $url;
     public $debug = false;
+
+    public $printDomain;
 
 
     /**
@@ -106,6 +109,7 @@ class LogisticsApiBase
     {
         $this->config = array_merge($this->config, $config);
         $this->apiDomain = $config['apiDomain'] ?? '';
+        $this->printDomain = $config['printDomain'] ?? '';
         return $this;
     }
 

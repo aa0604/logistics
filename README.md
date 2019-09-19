@@ -64,7 +64,7 @@ $service->setConsignee('mame', '手机号')
 
 ```php
 <?php
-$service->getPrintUrls(['我方订单号/物流内部单号'], '尺寸，如A4，（目前未完全支持）');
+$service->getPrintUrls(['我方订单号/物流单号'], '尺寸，如A4，（目前未完全支持）');
 ```
 
 ## 获取订单详情

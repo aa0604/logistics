@@ -209,17 +209,14 @@ class PengYan extends \xing\logistics\core\LogisticsApiBase implements Logistics
 
         $result = $this->post($url, $post);
         if (!$this->checkResultSuccess()) {
-            $this->log('url=' . $this->url);
-            $this->log('报文如下');
-            $this->log($this->post);
-            $this->log('返回原文如下');
-            $this->log($this->result);
-            throw new \Exception('请求失败');
+            throw new \Exception('鹏雁请求失败');
         }
 
         $files = [];
         foreach ($result['data'] as $data) {
-            $files[] = $data['labelUrl'];
+            // 测试地址可能会需要转换
+            $labelUrl = preg_replace('/http:\/\/192\.168\.0\.[0-9]+\//i', $this->printDomain, $data['labelUrl']);
+            $files[] = $labelUrl;
         }
 
         return $files;
