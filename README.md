@@ -8,6 +8,7 @@
 
 # 目录
 * [安装](#安装)
+* [物流列表](#物流列表)
 * [接口列表](#接口列表)
     * [初始化](#初始化)
     * [调试模式](#调试模式)
@@ -20,12 +21,14 @@
 ```$xslt
 composer require xing.chen/logistics dev-master
 ```
-# 接口列表
-# 初始化
+# 物流列表
+鹏雁：PengYan
+
+## 初始化
 使用很简单，先初始化，然后执行创建订单动作即可。
 ```php
 <?php
-$driveName = '物流驱动名称（见驱动名称列表）';
+$driveName = '物流驱动名称（见物流列表）';
 $service = \xing\logistics\core\LogisticsFactory::getInstance($driveName)->config($config);
 // 配置
 
