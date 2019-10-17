@@ -56,7 +56,7 @@ class PengYan extends \xing\logistics\core\LogisticsApiBase implements Logistics
     // 取消/删除订单
     public function cancelOrder($myOrderSn, $apiOrderSn = [])
     {
-        $url = '/osc-openapi/api/order/batchCancel';
+        $url = '/pengyan/osc-openapi/api/order/batchCancel';
         $post = [
             'anxOrderCodes' => $apiOrderSn,
         ];
@@ -104,7 +104,7 @@ class PengYan extends \xing\logistics\core\LogisticsApiBase implements Logistics
         $post['startCustTel'] = $this->consignor['tel'] ?? '';
 
         // 货物信息
-        $post['length'] = $post['height'] = $post['width'] = 1;
+//        $post['length'] = $post['height'] = $post['width'] = 1;
         $goodsDesc = array_filter(array_column($this->goods, 'goodsName'));
         $post['goodsDesc'] = implode(';', $goodsDesc) ?: '无';
         $goodsList = [];
@@ -120,7 +120,6 @@ class PengYan extends \xing\logistics\core\LogisticsApiBase implements Logistics
         }
         $post['goodsList'] = $goodsList;
 
-//        print_r($goodsList);die();
         $this->result = $this->post('/pengyan/osc-openapi/api/order/batchCreate', [$post]);
 
         return $this->result;
@@ -162,11 +161,17 @@ class PengYan extends \xing\logistics\core\LogisticsApiBase implements Logistics
         if (!empty($post)) {
             $post = json_encode($post, JSON_UNESCAPED_UNICODE);
             $header[] = 'Content-Length: ' . strlen($post);
+            $result = parent::post($url, $post, $header);
+        } else {
+
+            $this->url = $this->apiDomain . $url;
+            $result = file_get_contents($this->url);
         }
 
-        $result = parent::post($url, $post, $header);
-        $this->log('提交数据：');
+        $this->log('LogisticsApiBase::post 开始发送请求：');
+        $this->log('url：' . $this->url . "\r\n 报文：");
         $this->log($post);
+
         $this->log('请求返回的原文：' . $result);
         return $this->result = json_decode($result, 1);
     }
@@ -174,13 +179,21 @@ class PengYan extends \xing\logistics\core\LogisticsApiBase implements Logistics
     /**
      * 增加订单
      * @param $orderSn
-     * @return mixed|void
+     * @param null $logistics
+     * @param null $weight
+     * @param null $length
+     * @param null $width
+     * @param null $height
+     * @return $this|mixed
      */
-    public function addOrder($orderSn, $logistics = '')
+    public function addOrder($orderSn, $logistics = null, $weight = null, $length = null, $width = null, $height = null)
     {
         $this->data['custOrderCode'] = $orderSn;
         $this->data['prodCode'] = $logistics;
-        $this->data['prodCode'] = 'TEST-CSCP-B';
+        !empty($width) && $this->data['width'] = $width;
+        !empty($weight) && $this->data['weight'] = $weight;
+        !empty($height) && $this->data['height'] = $height;
+        !empty($length) && $this->data['length'] = $length;
         return $this;
     }
 
@@ -213,10 +226,14 @@ class PengYan extends \xing\logistics\core\LogisticsApiBase implements Logistics
         }
 
         $files = [];
-        foreach ($result['data'] as $data) {
-            // 测试地址可能会需要转换
-            $labelUrl = preg_replace('/http:\/\/192\.168\.0\.[0-9]+\//i', $this->printDomain, $data['labelUrl']);
-            $files[] = $labelUrl;
+        if (is_array($result['data'])) {
+            foreach ($result['data'] as $data) {
+                // 测试地址可能会需要转换
+                $labelUrl = preg_replace('/http:\/\/192\.168\.0\.[0-9]+\//i', $this->printDomain, $data['labelUrl']);
+                $files[] = $labelUrl;
+            }
+        } else {
+            throw new \Exception('暂时无数据', static::CODE_EMPTY);
         }
 
         return $files;

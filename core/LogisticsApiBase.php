@@ -55,6 +55,8 @@ class LogisticsApiBase
 
     public $printDomain;
 
+    // 数据为空时的代码
+    const CODE_EMPTY = 60;
 
     /**
      * 调试输出日志
@@ -206,9 +208,6 @@ class LogisticsApiBase
     public function post($url, $post = [], $header = [])
     {
         $this->url = $this->apiDomain . $url;
-        $this->log('LogisticsApiBase::post 开始发送请求：');
-        $this->log('url：' . $this->url . "\r\n 报文：");
-        $this->log($post);
         $this->post = $post;
 
 //        print_r($this->post);die($url);

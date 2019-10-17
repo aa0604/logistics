@@ -18,7 +18,7 @@ interface LogisticsInterface
      * @param $orderSn
      * @return mixed
      */
-    public function addOrder($orderSn, $logistics = '');
+    public function addOrder($orderSn, $logistics = null, $weight = null, $length = null, $width = null, $height = null);
     // 执行创建订单
     public function executeCreateOrder();
 
